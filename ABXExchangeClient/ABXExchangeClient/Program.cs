@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json; // Ensure you have the Newtonsoft.Json NuGet package installed
+using Newtonsoft.Json; 
 
 namespace AbxExchangeClient
 {
@@ -20,12 +20,12 @@ namespace AbxExchangeClient
 
     class Program
     {
-        private const int PacketSize = 17; // Packet size based on the data structure
+        private const int PacketSize = 17; 
 
         static async Task Main(string[] args)
         {
-            string serverAddress = "localhost"; // Replace with your server address
-            int port = 3000; // Replace with your server port
+            string serverAddress = "localhost"; 
+            int port = 3000; 
 
             try
             {
@@ -43,7 +43,7 @@ namespace AbxExchangeClient
                         var packet = ReceivePacket(stream);
                         if (packet == null)
                         {
-                            // Server closed the connection
+                            
                             break;
                         }
 
@@ -66,7 +66,7 @@ namespace AbxExchangeClient
                         }
                     }
 
-                    // Write to JSON file
+              
                     var json = JsonConvert.SerializeObject(new { packetStream = packets }, Formatting.Indented);
                     await File.WriteAllTextAsync("packets.json", json);
 
@@ -105,7 +105,7 @@ namespace AbxExchangeClient
                 int read = stream.Read(buffer, bytesRead, PacketSize - bytesRead);
                 if (read == 0)
                 {
-                    // Connection closed or no data available
+            
                    // return null;
                 }
                 bytesRead += read;
@@ -126,7 +126,7 @@ namespace AbxExchangeClient
                 }
                 catch (Exception ex)
                 {
-                    // Log any exceptions encountered during packet processing
+     
                     Console.WriteLine($"Error processing packet: {ex.Message}");
                     return null;
                 }
